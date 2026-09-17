@@ -5,17 +5,13 @@ import numpy as np
 
 import sounddevice as sd
 
-import soundfile as sf
-
-from datetime import datetime
-
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from matplotlib.figure import Figure
 
-from filters import LMSFilter, NLMSFilter, RLSFilter
+from .filters import LMSFilter, NLMSFilter, RLSFilter
 
-from signal_utils import detect_hum_frequencies
+from .signal_utils import detect_hum_frequencies, save_audio
 
 
 FS = 16000
@@ -74,6 +70,8 @@ class ANCProcessor:
             primary,
             FS
         )
+
+        print("Detected:", self.detected_freqs, flush=True)
 
         reference = self.generate_reference(
             self.detected_freqs,
@@ -219,13 +217,9 @@ class LiveANCApp:
 
         audio = np.concatenate(self.recorded)
 
-        filename = datetime.now().strftime(
-            "anc_output_%Y%m%d_%H%M%S.wav"
-        )
+        filename = save_audio(audio, FS, prefix="anc_output")
 
-        sf.write(filename, audio, FS)
-
-        print(f"Saved: {filename}")
+        print(f"Saved: {filename}", flush=True)
 
 
 def run_live_demo():

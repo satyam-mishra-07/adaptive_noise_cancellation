@@ -1,6 +1,20 @@
-# Ignore all wav files
-*.wav
-
-# Ignore all pycache folders wherever they are
-**/__pycache__/
+# --- Python ---
+__pycache__/
 *.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# --- Generated artifacts (regenerable by running the demos) ---
+*.wav
+outputs/*
+!outputs/.gitkeep
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- IDE / editors ---
+.vscode/
+.idea/

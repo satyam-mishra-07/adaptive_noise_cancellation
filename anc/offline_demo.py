@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from filters import LMSFilter, NLMSFilter, RLSFilter
+from .filters import LMSFilter, NLMSFilter, RLSFilter
 
-from signal_utils import (
+from .signal_utils import (
     snr_db,
     mse_metric,
     detect_hum_frequencies,

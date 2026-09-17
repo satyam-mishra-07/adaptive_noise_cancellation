@@ -15,19 +15,30 @@ Usage:
     python plot_frequency_analysis.py
 
 Output:
-    frequency_comparison.png  — Figure 1 for the report
+    outputs/frequency_comparison.png  — Figure 1 for the report
 """
+
+import os
+import sys
 
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
+# Make the repo root importable so the project's anc package is found.
+# The script can be run from anywhere: python scripts/plot_frequency_analysis.py
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT)
+
+OUTPUT_DIR = os.path.join(ROOT, "outputs")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
 # ---------------------------------------------------------------------------
-# Inline lightweight LMS filter (no dependency on filters.py needed to run
-# standalone, but keeps compatibility — import from filters.py if available)
+# Use the project's NLMS filter if available, otherwise fall back to a
+# self-contained LMS implementation so the script still runs standalone.
 # ---------------------------------------------------------------------------
 try:
-    from filters import NLMSFilter
+    from anc.filters import NLMSFilter
     USE_PROJECT_FILTER = True
 except ImportError:
     USE_PROJECT_FILTER = False
@@ -185,7 +196,7 @@ ax2.annotate(
 ax2.legend(fontsize=9, loc='upper right')
 
 plt.tight_layout()
-out_path = "frequency_comparison.png"
+out_path = os.path.join(OUTPUT_DIR, "frequency_comparison.png")
 fig.savefig(out_path, dpi=180, bbox_inches='tight')
 print(f"Saved: {out_path}")
 plt.close()

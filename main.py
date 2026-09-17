@@ -1,7 +1,7 @@
 import argparse
 
-from offline_demo import run_offline_demo
-from live_demo import run_live_demo
+from anc.offline_demo import run_offline_demo
+from anc.live_demo import run_live_demo
 
 parser = argparse.ArgumentParser()
 
