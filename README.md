@@ -33,7 +33,7 @@ All filters are implemented from scratch in `anc/filters.py` using NumPy — no 
 ├── scripts/
 │   └── plot_frequency_analysis.py  # FFT spectrum comparison figure
 ├── docs/
-│   └── Project_Report_Final_Maa_Kasam.pdf
+│   └── Project_Report.pdf
 ├── outputs/                     # Generated WAV files & figures (gitignored)
 ├── requirements.txt
 └── README.md
